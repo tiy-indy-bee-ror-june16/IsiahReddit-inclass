@@ -9,7 +9,52 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
+
+ *= require bootstrap
  *= require_tree .
  *= require_self
  */
+
+ body {
+   background-color: #CEE3F8;
+ }
+
+ header {
+   font-size: 12px;
+   background-color: #F0F0F0;
+   border-bottom: 1px black solid;
+ }
+
+
+#logo {
+  font-family: Monaco;
+}
+#logo :hover{
+  text-decoration:none;
+}
+
+span {
+  transform:scale(1,1.2);
+  display:inline-block;
+}
+
+.each-link {
+  border: 1px solid black;
+}
+
+.links-section {
+  background-color: white;
+}
+
+.side-button1{
+  margin-top: 200px;
+}
+
+.side-button {
+  margin-top: 40px;
+  margin-bottom:40px
+}
+
+.small-arrow {
+  height: 25px;
+}

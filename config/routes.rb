@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
+  resources :subreddits
+  resources :users
+  resources :links
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'links#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  get 'links/:id/go' => 'links#go', as: :go
+  get 'links/:id/up_vote' => 'links#up_vote', as: :up_vote
+  get 'links/:id/down_vote' => 'links#down_vote', as: :down_vote
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

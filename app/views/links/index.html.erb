@@ -1,0 +1,24 @@
+<%= paginate @links, :window => 1 %>
+<% @links.each do |link| %>
+<div class="row each-link">
+  <div class="col-md-2">
+    <div class="row vote-image">
+      <div class="col-md-2">
+      <%= link_to (image_tag "up-arrow", class: "small-arrow"), up_vote_path(id: link.id) %>
+      </div>
+    </div>
+    <h4 class="row"># of upvotes: <%= link.vote_score %></h4>
+    <div class="row vote-image">
+      <div class="col-md-2">
+      <%= link_to (image_tag "down-arrow", class: "small-arrow"), down_vote_path(id: link.id) %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 col-md-offset-1">
+    <h4 class="row"><%= link_to link.title, go_path(id: link.id) %> </h4>
+    <h6 class="row">Description:<%= link.summary %></h6>
+    <h6 class="row"> Submitted <%= TimeDifference.between( link.created_at,Time.now).in_hours.round %> hours ago by <%= link.user.username %> to category: <%= link.subreddit.name %></h6>
+  </div>
+</div>
+<% end %>
+<%= paginate @links, :window => 1 %>

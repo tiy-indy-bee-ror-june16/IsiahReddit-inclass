@@ -1,0 +1,21 @@
+<%= simple_form_for link do |f| %>
+  <% if link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+      <% link.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= f.input :address, label: "URL" %>
+  <%= f.input :title %>
+  <%= f.input :summary %>
+  <%= f.association :subreddit %>
+  <%= f.association :user,  collection: User.all.map{|x| [x.username, x.id]}%>
+  <%= f.button :submit %>
+<% end %>
