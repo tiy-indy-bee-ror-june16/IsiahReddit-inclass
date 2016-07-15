@@ -28,7 +28,7 @@ links = 1000.times.map do
       Faker::Address.city
     ].sample(2).join("; "),
     summary: Faker::Hipster.sentence,
-    vote_score: 0,
+    vote_score: ((1..100).to_a.sample) * ((1..40).to_a.sample) - ((1..1000).to_a.sample)
     user: users.sample,
     subreddit: subreddits.sample
   )

@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy, :up_vote, :down_vote, :go]
-
+  #debugging heroku heroku log -t
   # GET /links
   # GET /links.json
   def index
