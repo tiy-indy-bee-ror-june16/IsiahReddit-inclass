@@ -5,6 +5,7 @@ class LinksController < ApplicationController
   # GET /links.json
   def index
     @links = Link.order(vote_score: :desc).page(params[:page]).per(10)
+    @num = 1 + ((@links.current_page - 1) * 10)
   end
 
   # GET /links/1
@@ -40,14 +41,20 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-
-    respond_to do |format|
-      if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
-        format.json { render :show, status: :created, location: @link }
-      else
-        format.html { render :new }
-        format.json { render json: @link.errors, status: :unprocessable_entity }
+    add_http
+    if Link.find_by address: @link.address.downcase
+      new_link = Link.find_by address: @link.address
+      redirect_to go_path(new_link)
+    else
+      @link.vote_score = 0
+      respond_to do |format|
+        if @link.save
+          format.html { redirect_to @link, notice: 'Link was successfully created.' }
+          format.json { render :show, status: :created, location: @link }
+        else
+          format.html { render :new }
+          format.json { render json: @link.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -85,5 +92,11 @@ class LinksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
       params.require(:link).permit(:address, :title, :summary, :vote_score, :subreddit_id, :user_id)
+    end
+
+    def add_http
+      unless @link.address.downcase.start_with?("http")
+        @link.address = @link.address.insert(0, "http://")
+      end
     end
 end

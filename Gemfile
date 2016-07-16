@@ -34,6 +34,7 @@ gem 'faker'
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'time_difference', '~> 0.4.2'
+gem 'validate_url', '~> 1.0', '>= 1.0.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

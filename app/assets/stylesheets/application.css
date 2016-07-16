@@ -39,7 +39,8 @@ span {
 }
 
 .each-link {
-  border: 1px solid black;
+  text-decoration: none;
+  color:blue;
 }
 
 .links-section {
@@ -57,4 +58,17 @@ span {
 
 .small-arrow {
   height: 25px;
+}
+
+.link-number {
+  padding-top: 25px;
+  color:#C6C6C6;
+}
+
+.vote-score {
+  color: #C6C6C6;
+}
+
+#link-title {
+  color:blue
 }
