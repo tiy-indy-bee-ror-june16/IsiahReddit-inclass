@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @subreddit.name %>
+<div class="row">
+  <h5 class="col-md-12"><strong><%= @subreddit.name %></strong></h5>
+</div>
 </p>
 
-<%= link_to 'Edit', edit_subreddit_path(@subreddit) %> |
-<%= link_to 'Back', subreddits_path %>
+<%= render partial: "link", locals:{links: @subreddit.links.sort_by{|link| link.vote_score}.reverse} %>

@@ -83,6 +83,23 @@ class LinksController < ApplicationController
     end
   end
 
+  def search
+    @num = 1
+    @searched_links = Link.searched_links(params[:search_term])
+    @searched_users = User.searched_users(params[:search_term])
+    @searched_subreddits = Subreddit.searched_subreddits(params[:search_term])
+    @searched_users += @searched_subreddits
+    @searched_users += @searched_links
+    #why does += not work instead of <<??
+    # @searched_links << User.searched_users(params[:search_term])
+    # @searched_links << Subreddit.searched_subreddits(params[:search_term])
+    if @searched_links[0]
+      @search_message = "Here are the users, subreddits, and posts that match your search terms:"
+    else
+      @search_message = "I'm sorry, we were not able to find any matches for your search term"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
@@ -91,7 +108,7 @@ class LinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def link_params
-      params.require(:link).permit(:address, :title, :summary, :vote_score, :subreddit_id, :user_id)
+      params.require(:link).permit(:address, :title, :summary, :vote_score, :subreddit_id, :user_id, :picture)
     end
 
     def add_http

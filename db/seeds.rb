@@ -30,6 +30,7 @@ links = 1000.times.map do
     summary: Faker::Hipster.sentence,
     vote_score: ((1..100).to_a.sample) * ((1..40).to_a.sample) - ((1..1000).to_a.sample),
     user: users.sample,
-    subreddit: subreddits.sample
+    subreddit: subreddits.sample,
+    picture: ["https://placeimg.com/640/480/any", "https://unsplash.it/g/200/300", "http://www.fillmurray.com/200/300", "http://placecage.com/c/200/300", "http://placebear.com/400/200", "http://placekitten.com/300/350", "http://baconmockup.com/300/200", nil, nil, nil, nil].sample
   )
 end

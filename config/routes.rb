@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'links/:id/go' => 'links#go', as: :go
   get 'links/:id/up_vote' => 'links#up_vote', as: :up_vote
   get 'links/:id/down_vote' => 'links#down_vote', as: :down_vote
+  get 'search' => 'links#search'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

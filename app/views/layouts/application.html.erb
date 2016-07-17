@@ -9,10 +9,13 @@
 <body>
   <div class="container-fluid">
     <header class="row text-center">
-      <div class="col-md-9 col-md-offset-3">
-    <% set_subreddits.each do |subreddit| %>
-      <%= subreddit.name%> -
+      <div class="col-md-10">
+    <% Subreddit.all.take(13).each do |subreddit| %>
+      <%=link_to subreddit.name, subreddit_path(id: subreddit.id)%> -
       <% end %>
+      </div>
+      <div class="col-md-2">
+        <%= collection_select(:subreddit, :name, Subreddit.all, :name, :name) %>
       </div>
     </header>
     <div class="row" id="logo-bar">
@@ -21,17 +24,34 @@
       </div>
     </div>
     <div class="row links-section">
-      <div class="col-md-10">
+      <div class="col-md-9">
         <%= yield %>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3">
         <div class="row">
-          <%= link_to new_link_path, class: "col-md-10 col-md-offset-1 btn btn-info btn-sm side-button1" do %>
+          <form class="navbar-form navbar-left" role="search" action="/search" method="get">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" name="search_term">
+            </div>
+            <button type="submit" class="btn btn-small btn-default">Submit</button>
+          </form>
+        </div>
+        <div class="row">
+          <%= link_to (image_tag "pizza.png", class:"img-responsive"), root_path  %>
+        </div>
+        <div class="row">
+          <%= link_to new_link_path, class: "col-md-10 col-md-offset-1 btn btn-info btn-sm side-button" do %>
             <span class="glyphicon glyphicon-pencil"></span> CREATE NEW POST
           <% end %>
           <%= link_to new_user_path, class: "col-xs-10 col-xs-offset-1 btn btn-info btn-sm side-button" do %>
             <span class="glyphicon glyphicon-user"></span> CREATE NEW USER
           <% end %>
+          <%= link_to new_subreddit_path, class: "col-xs-10 col-xs-offset-1 btn btn-info btn-sm side-button" do %>
+            <span class="glyphicon glyphicon-heart"></span> CREATE NEW SUBREDDIT
+          <% end %>
+        </div>
+        <div class="row side-button">
+          <%= link_to (image_tag "gta.png", class:"img-responsive"), root_path  %>
         </div>
       </div>
     </div>

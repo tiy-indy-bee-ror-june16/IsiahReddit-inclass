@@ -1,16 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<div class="row">
+  <h5 class="col-md-12"><strong>Username:</strong> <%= @user.username %></h5>
+  <h5 class="col-md-12"><strong>Description:</strong> <%= @user.description %></h5>
+  <div class=col-md-12><%= link_to edit_user_path(@user), class: "btn btn-info" do %>
+      <span class="glyphicon glyphicon-pencil"></span> EDIT USER
+      <% end %>
+  </div>
+  <h5 class="col-md-12 content-border"><strong>User's Generated Content</strong></h5>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
 
-<%= render partial: "link", locals:{links: @user.links} %>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= render partial: "link", locals:{links: @user.links.sort_by{|link| link.vote_score}.reverse} %>
