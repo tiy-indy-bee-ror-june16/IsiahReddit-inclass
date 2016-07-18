@@ -7,11 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 users = 100.times.map do
-  User.create!(username: Faker::Internet.user_name, description: Faker::Hacker.say_something_smart)
+  User.create!(username: Faker::Internet.user_name.split(".").join("_"), description: Faker::Hacker.say_something_smart)
 end
 
 subreddits = 10.times.map do
-  Subreddit.create!(name:Faker::Book.genre)
+  Subreddit.create!(name:Faker::Book.genre.split(" ").join("_"))
 end
 
 links = 1000.times.map do

@@ -19,7 +19,7 @@
       <h6 class="col-md-12 text-left" >Description:<%= link.summary %></h6>
     </div>
     <div class="row">
-      <h6 class="col-md-10 text-left"> Submitted <%= TimeDifference.between( link.created_at,Time.now).in_hours.round %> hours ago by <%= link_to link.user.username, user_path(id: link.user.id) %> to category: <%= link_to link.subreddit.name, subreddit_path(id: link.subreddit.id) %></h6>
+      <h6 class="col-md-10 text-left"> Submitted <%= TimeDifference.between( link.created_at,Time.now).in_hours.round %> hours ago by <%= link_to link.user.username, user_path(username: link.user.username) %> to category: <%= link_to link.subreddit.name, subreddit_path(name: link.subreddit.name) %></h6>
     </div>
   </div>
 </div>

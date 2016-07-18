@@ -28,7 +28,7 @@ class SubredditsController < ApplicationController
 
     respond_to do |format|
       if @subreddit.save
-        format.html { redirect_to @subreddit, notice: 'Subreddit was successfully created.' }
+        format.html { redirect_to subreddit_path(name: @subreddit.name), notice: 'Subreddit was successfully created.' }
         format.json { render :show, status: :created, location: @subreddit }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class SubredditsController < ApplicationController
   def update
     respond_to do |format|
       if @subreddit.update(subreddit_params)
-        format.html { redirect_to @subreddit, notice: 'Subreddit was successfully updated.' }
+        format.html { redirect_to subreddit_path(name: @subreddit.name), notice: 'Subreddit was successfully updated.' }
         format.json { render :show, status: :ok, location: @subreddit }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class SubredditsController < ApplicationController
   def destroy
     @subreddit.destroy
     respond_to do |format|
-      format.html { redirect_to subreddits_url, notice: 'Subreddit was successfully destroyed.' }
+      format.html { redirect_to subreddit_path(name: @subreddit.name), notice: 'Subreddit was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +64,7 @@ class SubredditsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subreddit
-      @subreddit = Subreddit.find(params[:id])
+      @subreddit = Subreddit.find_by name: params[:name]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

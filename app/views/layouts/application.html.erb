@@ -11,7 +11,7 @@
     <header class="row text-center">
       <div class="col-md-10">
     <% Subreddit.all.take(13).each do |subreddit| %>
-      <%=link_to subreddit.name, subreddit_path(id: subreddit.id)%> -
+      <%=link_to subreddit.name, subreddit_path(name: subreddit.name)%> -
       <% end %>
       </div>
       <div class="col-md-2">
