@@ -36,3 +36,7 @@ links = 100.times.map do
     bob.votes << Vote.create(value:1, user_id: users.sample, link_id: bob.id)
   end
 end
+
+Vote.all.each do |vote|
+  vote.update_attribute(:user_id, rand(100))
+end

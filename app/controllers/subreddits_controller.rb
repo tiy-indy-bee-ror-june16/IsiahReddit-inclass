@@ -5,6 +5,10 @@ class SubredditsController < ApplicationController
   # GET /subreddits.json
   def index
     @subreddits = Subreddit.all
+    respond_to do |format|
+      format.html{}
+      format.json { @subreddits.to_json }
+    end
   end
 
   # GET /subreddits/1
