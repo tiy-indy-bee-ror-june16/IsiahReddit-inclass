@@ -4,6 +4,6 @@ class Subreddit < ActiveRecord::Base
     message: "%{value} is reserved."}
 
   def self.searched_subreddits(params)
-    @searched_subreddits = Subreddit.where("name LIKE ?", "%#{params}%")
+    where("name LIKE ?", "%#{params}%")
   end
 end

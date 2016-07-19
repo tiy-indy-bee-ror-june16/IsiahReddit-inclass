@@ -4,10 +4,10 @@
     <% @num += 1 %>
   </div>
   <div class="col-md-8">
-    <h4 class="row"><%= link_to "Subreddit: #{link.name}", user_path(id: link.id) %> </h4>
+    <h4 class="row"><%= link_to "Subreddit: #{subreddit.name}", subreddit_path(name: subreddit.name) %> </h4>
     <div class="row">
       <h6 class="col-md-12 text-left" >Example Topics:
-      <% link.links.take(5) do |this_link| %>
+      <% subreddit.links.take(5) do |this_link| %>
       <%= this_link.title %>,
       <% end %>
       </h6>

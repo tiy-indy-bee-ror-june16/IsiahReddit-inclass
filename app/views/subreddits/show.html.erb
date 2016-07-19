@@ -4,5 +4,6 @@
   <h5 class="col-md-12"><strong><%= @subreddit.name %></strong></h5>
 </div>
 </p>
-
-<%= render partial: "link", locals:{links: @subreddit.links.sort_by{|link| link.vote_score}.reverse} %>
+<%= paginate @subreddit_links_each, :window => 1 %>
+<%= render partial: "link", locals:{links: @subreddit_links} %>
+<%= paginate @subreddit_links_each, :window => 1 %>

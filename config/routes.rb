@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :subreddits, param: :name
-  resources :users, param: :username
+  resources :users, param: :username, except:[:new]
   resources :links
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   get 'links/:id/up_vote' => 'links#up_vote', as: :up_vote
   get 'links/:id/down_vote' => 'links#down_vote', as: :down_vote
   get 'search' => 'links#search'
+  get 'login' => 'user_sessions#new'
+  post 'login' => 'user_sessions#create'
+  delete 'logout' => 'user_sessions#destroy'
+  get 'signup' => 'users#new'
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

@@ -10,6 +10,9 @@ class SubredditsController < ApplicationController
   # GET /subreddits/1
   # GET /subreddits/1.json
   def show
+    #pagination messed up, shows same set for each page.
+    @subreddit_links = @subreddit.links.sort_by{|link| link.vote_score}.reverse
+    @subreddit_links_each = Kaminari.paginate_array(@subreddit_links).page(params[:page]).per(4)
   end
 
   # GET /subreddits/new

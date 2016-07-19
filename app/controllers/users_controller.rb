@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @num = 1
+    all_user_links
   end
 
   # GET /users/new
@@ -69,6 +71,52 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :description)
+      params.require(:user).permit(:username, :description, :email, :password)
     end
+
+    def all_user_links
+      user_generated_links
+      user_liked_links
+      user_disliked_links
+      user_clicked_links
+    end
+#why not working???
+    def kaminari_links
+      @user_links_posts = []
+      @user_links_posts += @user_links
+      @user_links_posts += @user_disliked_links
+      @user_links_posts += @user_clicked_links
+      @user_links_posts += @user_generated_links
+      @user_links_posts = Kaminari.paginate_array(@user_links_posts).page(params[:page]).per(10)
+      #@user_links_posts is nil. Why??
+    end
+
+    def user_generated_links
+      @user_links = @user.links.sort_by{|link| link.vote_score}.reverse
+    end
+
+    def user_liked_links
+      @user_liked_links = []
+      @user.votes.where("value = 1").each do |vote|
+        @user_liked_links << vote.link
+      end
+      @user_liked_links.uniq!
+    end
+
+    def user_disliked_links
+      @user_disliked_links = []
+      @user.votes.where("value = -1").each do |vote|
+        @user_disliked_links << vote.link
+      end
+      @user_disliked_links.uniq!
+    end
+
+    def user_clicked_links
+      @user_clicked_links = []
+      @user.votes.where("value = 0.2").each do |vote|
+        @user_clicked_links << vote.link
+      end
+      @user_clicked_links.uniq!
+    end
+
 end

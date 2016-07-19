@@ -14,17 +14,31 @@ class LinksController < ApplicationController
   end
 
   def up_vote
-    @link.increment!(:vote_score)
-    redirect_to :back
+    if session[:user_id]
+      Vote.create(value:1.0, link_id:@link.id, user_id:session[:user_id])
+      redirect_to :back
+    else
+      redirect_to login_path
+      flash.notice = "Please login or create an account in order to vote"
+    end
   end
 
   def down_vote
-    @link.increment!(:vote_score, -1)
-    redirect_to :back
+    if session[:user_id]
+      Vote.create(value: -1.0, link_id:@link.id, user_id:session[:user_id])
+      redirect_to :back
+    else
+      redirect_to login_path
+      flash.notice = "Please login or create an account in order to vote"
+    end
   end
 
   def go
-    @link.increment!(:vote_score)
+    if session[:user_id]
+      Vote.create(value: 0.2, link_id:@link.id, user_id:session[:user_id])
+    else
+      Vote.create(value: 0.2, link_id:@link.id, user_id: nil)
+    end
     redirect_to @link.address
   end
 
@@ -44,7 +58,7 @@ class LinksController < ApplicationController
     add_http
     if Link.find_by address: @link.address.downcase
       new_link = Link.find_by address: @link.address
-      redirect_to go_path(new_link)
+      redirect_to root_path
     else
       @link.vote_score = 0
       respond_to do |format|
@@ -91,8 +105,8 @@ class LinksController < ApplicationController
     @searched_users += @searched_subreddits
     @searched_users += @searched_links
     #why does += not work instead of <<??
-    # @searched_links << User.searched_users(params[:search_term])
-    # @searched_links << Subreddit.searched_subreddits(params[:search_term])
+    # @searched_links += User.searched_users(params[:search_term])
+    # @searched_links += Subreddit.searched_subreddits(params[:search_term])
     if @searched_links[0]
       @search_message = "Here are the users, subreddits, and posts that match your search terms:"
     else

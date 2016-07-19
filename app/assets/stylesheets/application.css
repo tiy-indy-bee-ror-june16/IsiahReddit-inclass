@@ -72,3 +72,10 @@ span {
 .row-margin {
   margin-bottom:5px;
 }
+
+.login-button {
+  font-family: Helvetica;
+  font-size: 45px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

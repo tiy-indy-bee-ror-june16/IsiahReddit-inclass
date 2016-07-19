@@ -2,13 +2,29 @@
 
 <div class="row">
   <h5 class="col-md-12"><strong>Username:</strong> <%= @user.username %></h5>
+  <h5 class="col-md-12"><strong>Email:</strong> <%= @user.email %></h5>
   <h5 class="col-md-12"><strong>Description:</strong> <%= @user.description %></h5>
   <div class=col-md-12><%= link_to edit_user_path(username: @user.username), class: "btn btn-info" do %>
-      <span class="glyphicon glyphicon-pencil"></span> EDIT USER
+      <span class="glyphicon glyphicon-pencil"></span> SETTINGS/PROFILE
       <% end %>
   </div>
   <h5 class="col-md-12 content-border"><strong>User's Generated Content</strong></h5>
 </div>
 
+<%= render partial: "link", locals:{links: @user_links} %>
 
-<%= render partial: "link", locals:{links: @user.links.sort_by{|link| link.vote_score}.reverse} %>
+
+<div class="row">
+  <h5 class="col-md-12 content-border"><strong>User's UpVoted Content</strong></h5>
+  <%= render @user_liked_links %>
+</div>
+<div class="row">
+  <h5 class="col-md-12 content-border"><strong>User's DownVoted Content</strong></h5>
+  <%= render @user_disliked_links %>
+</div>
+<div class="row">
+  <h5 class="col-md-12 content-border"><strong>User's Clicked Content</strong></h5>
+  <%= render @user_clicked_links %>
+</div>
+
+<%= @user_links_posts %>

@@ -1,6 +1,3 @@
 <h5 class="row"><%= @search_message %></h5>
-<% @searched_users.each do |searched_link| %>
 <!-- when not use "partial:", doesn't work weirdly still sends error message from inside partial"  -->
-    <!-- <%= searched_link.inspect %> -->
-    <%= render partial: searched_link.class.to_s.downcase.split(":")[0], locals: {:link => searched_link, :@num => @num} %>
-<% end %>
+    <%= render @searched_users %>

@@ -1,0 +1,11 @@
+<h4>Login:</h4>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+
+<%= simple_form_for :login_info do |f| %>
+  <%= f.input :username %>
+  <%= f.input :password %>
+  <%= f.submit %>
+<% end %>
